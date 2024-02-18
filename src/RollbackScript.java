@@ -20,7 +20,9 @@ public class RollbackScript {
             statement.execute("ALTER TABLE students ALTER COLUMN st_name TYPE  VARCHAR(20)");
             statement.execute("ALTER TABLE students ALTER COLUMN st_last TYPE  VARCHAR(20)");
 
-
+            // Rollback changes for INTERESTS table
+            statement.execute("DROP TABLE interests");
+            statement.execute("ALTER TABLE BackupInterests RENAME TO interests");
             System.out.println("Rollback successful!");
 
         } catch (SQLException e) {
