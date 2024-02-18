@@ -54,6 +54,26 @@ String password = "your-password";
 * Replace your-username with the owner of the database (e.g., postgres).
 * Change your-password to the password assigned to log in to pgAdmin or SQL shell.
 
+## Compilation
+
+Before running the scripts, you need to compile the Java source files. Open a terminal or command prompt and navigate to the directory containing the Java files:
+
+```bash
+    cd path/to/your/project
+```
+
+Compile MigrationScript.java:
+
+```bash
+    javac MigrationScript.java
+```
+
+Compile RollbackScript.java:
+
+```bash
+    javac RollbackScript.java
+```
+
 ## Migration
 
 To apply the changes described in the assignment instructions, run MigrationScript.java. This script will automatically migrate the changes to your database.
