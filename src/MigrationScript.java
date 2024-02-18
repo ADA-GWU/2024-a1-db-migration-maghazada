@@ -21,6 +21,19 @@ public class MigrationScript {
             statement.execute("ALTER TABLE students ALTER COLUMN st_name TYPE VARCHAR(30)");
             statement.execute("ALTER TABLE students ALTER COLUMN st_last TYPE VARCHAR(30)");
 
+            // Backup the original interests table
+            statement.execute("CREATE TABLE BackupInterests AS SELECT * FROM interests");
+
+            // Create a new table to store aggregated interests
+            statement.execute("CREATE TABLE AggregatedInterests AS " +
+                    "SELECT student_id, ARRAY_AGG(interest ORDER BY interest) AS interests " +
+                    "FROM interests " +
+                    "GROUP BY student_id");
+
+            statement.execute("DROP TABLE interests");
+
+            statement.execute("ALTER TABLE AggregatedInterests RENAME TO interests");
+
             System.out.println("Migration successful!");
 
         } catch (SQLException e) {
